@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Result</title>
+    <link rel="stylesheet" href="/static/css/result.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="/static/js/result.js"></script>
+    <script src="/static/js/test.js"></script>
+</head>
+<body>
+<div class = "main">
+    <div class = "left">
+        <div class = "jung_image">
+        <img src="/static/jung.jpg" alt="Result Image" class = "jung">
+        </div>
+        <div class = "juyok">
+            <p>사용자가 뽑은 괘는 {{choice}}이고, {{choice}}의 지괘(짝괘)는 {{choice2}}입니다.<br> 
+                주역은 변화의 원리를 담은 책입니다. 지금 힘든 상황에 처해 있더라도, <br>
+                주역에서 주는 메세지처럼 모든 상황은 늘 고정되어 있는 것이 아니니 <br>
+                미래에도 많은 변화가 있을 것이며, 본인 생에 선택지가 점점 넓어져 <br>
+                앞으로의 세월 동안 긍정적으로 변화를 이끌어낼 여지가 충분하다는 <br>
+                점을 늘 염두하셨으면 합니다. 본인이 뽑은 본괘와 본괘와 변화가 <br>
+                맞물려 있는 지괘의 모습을 모두 참고하시고, 앞날의 긍정적인 방향 <br>
+                지표로 삼으시길 바랍니다.</p>
+        </div>
+        <div class = "button">
+            <button id="download" onclick = "download()" class = "download"> PDF 다운하기</button>
+            <a href="/" class = "begin"> 처음으로</a>
+        </div>
+    </div>
+
+    <div id="container" class = "container">
+        <div class="images">
+        <img src="" id="img" alt="Result Image">
+        <img src="" id="img2" alt="Result Image">
+        </div>
+        <div class = "imagetitle">
+            <h3 class = "choicevalue">본괘: {{ choice }}</h3>
+            <h3 class = "choicevalue">지괘: {{ choice2 }}</h3> 
+        </div>
+
+        <div class="text">
+        {% for message in conversation %}
+        {% if message.role == 'assistant' %}
+
+        <div class="message assistant">
+        <p class="solution" id = "textContent">{{ message.content }}</p>
+        </div>
+
+        {% elif message.role == 'user' %}
+        <div class="message user">
+        <p class="question">질문: {{ message.content }}</p>
+        {% if choice %}
+        <div class = "bytevalue" style="display: none;">
+        <p id="bytevalue">{{byte}}</p>
+        <p id="bytevalue2">{{byte2}}</p>
+        </div>
+        {% endif %}
+        </div>
+
+        {% endif %}
+        {% endfor %}
+        </div>
+    </div>
+</div>
+</body>
+</html>

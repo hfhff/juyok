@@ -1,0 +1,6 @@
+https://stackoverflow.com/questions/17293135/download-a-div-in-a-html-page-as-pdf-using-javascript
+https://github.com/parallax/jsPDF
+https://blog.naver.com/sunred3/222238660281
+
+   
+

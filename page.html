@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>주역 콘텐츠</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="/static/js/pagebutton.js"></script>
+</head>
+
+<body>
+
+<form id="numberForm" action="/result" method="post">
+
+<div id="step1">
+    <div class = "backg">
+        <h1 class="title">무엇이든 물어주역</h1>
+        <h3 class="subtitle">정약용의 주역본으로 고민을 해결한다</h3>
+    
+        <div class="container">
+            <div class="content-box">
+                <label class="comment">당신의 고민을 입력하세요!</label>
+                <br><br>
+                <textarea id="user_input" name="user_input" class="input" placeholder="여기에 입력하세요..."></textarea>
+                <br><br>
+                <div class = "guide">
+                <a><주역사전(周易四箋)></a>
+                <p>조선후기 실학자 정약용이 『주역본의』에 근거하여 주역사법을 추이 · 물상 · 호체 · 효변으로
+                나누어 풀이하고, 괘사와 효사에 주석을 달아 1808년에 간행한 주석서. 유학서.</p>
+                </div>
+                <div class="modal fade" id="explanationModal" tabindex="-1" role="dialog" aria-labelledby="explanationModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="explanationModalLabel">무엇이든 물어주역</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                <p><무엇이든 물어주역 하는 법> <br><br><br>
+                1. 고민을 입력한다.<br><br>
+                2. 6개의 음과 양을 골라 효를 만든다.<br><br><br>
+                『周易四箋』의 ‘四箋’이란 글자 그대로는 ‘네 가지 주석’이라는 뜻이지만, 
+                보다 구체적으로는 『주역』 해석을 위한 ①추이(推移), ②효변(爻變), ③호체(互體), ④물상(物象)
+                네 가지 방법론을 가리킵니다. 다산은 1801년 강진에 유배된 이후 자신에게 닥친 불운을 
+                오히려 학문을 닦을 수 있는 기회로 삼아『주역』연구에 몰두하였고, 그 결과로『주역』주석서인 
+                『주역사전』을 펴냈습니다. 
+                </p>
+                </div>
+                </div>
+                </div>
+                </div>
+            </div>
+            </div> 
+        </div>
+        <button type = "button" explanationButton" class="btn-prev" data-toggle="modal" data-target="#explanationModal">
+            도움말</button>
+        <button id = "next" type="button" onclick="validateStep1AndNext('step2')" class="btn-next">다음</button>
+</div>
+
+<div id="step2" style="display: none;">
+    <div class = "backg">
+        <h1 class="title">효 생성하기</h1>
+        <h3 class="subtitle">정약용의 주역본으로 고민을 해결한다</h3>
+        <div class="container">
+        <div class="content-box"><br><br>
+        <div class = "choose">
+            <label for="value">음과 양으로 효 만들기</label><br>
+            <label for = "gua">상구: </label>
+            <input type="radio" id="value1" name="value1" value="1"> 음
+            <input type="radio" id="value1" name="value1" value="0"> 양<br>
+            <label for = "gua">구오:</label>
+            <input type="radio" id="value2" name="value2" value="1"> 음
+            <input type="radio" id="value2" name="value2" value="0"> 양<br>
+            <label for = "gua">육사: </label>
+            <input type="radio" id="value3" name="value3" value="1"> 음
+            <input type="radio" id="value3" name="value3" value="0"> 양<br>
+            <label for = "gua">육삼: </label>
+            <input type="radio" id="value4" name="value4" value="1"> 음
+            <input type="radio" id="value4" name="value4" value="0"> 양<br>
+            <label for = "gua">구이: </label>
+            <input type="radio" id="value5" name="value5" value="1"> 음
+            <input type="radio" id="value5" name="value5" value="0"> 양<br>
+            <label for = "gua">초구: </label>
+            <input type="radio" id="value6" name="value6" value="1"> 음
+            <input type="radio" id="value6" name="value6" value="0"> 양
+        </div>
+       <img src = "/static/gua.png" class = "sample_image">
+        </div>
+    </div>
+    </div>
+    <button type = "button" onclick="prevStep('step2')" class="btn-prev">이전</button>
+    <button type="submit" id = "submitButton" class = "btn-next" onclick="validateSubmit(event)">결과 보기</button>
+</div>
+
+<div class="loading" id="loadingDiv">
+<div class="spinner">
+<div class="bounce1"></div>
+<div class="bounce2"></div>
+<div class="bounce3"></div>
+</div>
+<br><br>
+<p>Loading...</p>
+</div>
+
+<div id="result" style="display: none;"></div>
+</body>
+</html>
